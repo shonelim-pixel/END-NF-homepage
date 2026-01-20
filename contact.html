@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - END NF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">END <span>NF</span></a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">홈</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">환우회 소개</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">환우회 소개</a></li>
+                            <li><a href="about.html#mission">설립 목적</a></li>
+                            <li><a href="about.html#history">연혁</a></li>
+                            <li><a href="support.html">후원 안내</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="medical.html" class="nav-link">
+                            <span class="nav-icon">🏥</span>
+                            <span class="nav-text">질환 정보</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="medical.html">신경섬유종증이란?</a></li>
+                            <li><a href="medical.html#nf1">제1형 (NF1)</a></li>
+                            <li><a href="medical.html#nf2">NF2 관련 신경초종증</a></li>
+                            <li><a href="medical.html#swn">신경초종증 (SWN)</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="news.html" class="nav-link">
+                            <span class="nav-icon">📰</span>
+                            <span class="nav-text">소식</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">활동 소식</a></li>
+                            <li><a href="press.html">언론기사</a></li>
+                            <li><a href="press.html#youtube">유튜브 영상</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="resources.html" class="nav-link">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">자료실</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="resources.html">도움 자료실</a></li>
+                            <li><a href="resources.html#downloads">다운로드 자료</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="community.html" class="nav-link active">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">커뮤니티</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="community.html">커뮤니티 안내</a></li>
+                            <li><a href="https://cafe.naver.com/endnf" target="_blank">네이버 카페</a></li>
+                            <li><a href="contact.html">문의하기</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero" style="padding: 4rem 2rem;">
+        <div class="hero-content">
+            <h1>Contact Us</h1>
+            <p>Have questions or want to get involved? Reach out to us.</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div
+                style="max-width: 600px; margin: 0 auto; background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div>
+                        <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name</label>
+                        <input type="text" id="name" name="name"
+                            style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-200); border-radius: 8px;"
+                            placeholder="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="email"
+                            style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+                        <input type="email" id="email" name="email"
+                            style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-200); border-radius: 8px;"
+                            placeholder="Your Email" required>
+                    </div>
+                    <div>
+                        <label for="message"
+                            style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message</label>
+                        <textarea id="message" name="message" rows="5"
+                            style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-200); border-radius: 8px;"
+                            placeholder="How can we help?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <a href="index.html" style="color:white;">END <span style="color:var(--primary-green);">NF</span></a>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">환우회 소개</a>
+                <a href="medical.html">질환 정보</a>
+                <a href="news.html">활동 소식</a>
+                <a href="support.html">후원 안내</a>
+                <a href="community.html">커뮤니티</a>
+                <a href="resources.html">도움 자료실</a>
+                <a href="press.html">언론기사</a>
+            </div>
+            <p>&copy; 2026 END NF. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
