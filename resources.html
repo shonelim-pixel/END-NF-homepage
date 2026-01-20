@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도움 자료실 - END NF</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .resource-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 85, 170, 0.15);
+        }
+
+        .resource-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        .resource-category {
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .resource-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+            margin-bottom: 1rem;
+        }
+
+        .resource-size {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .resource-type {
+            font-size: 0.75rem;
+            background: var(--gray-100);
+            color: #666;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 85, 170, 0.3);
+            opacity: 0.95;
+        }
+
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .category-header h3 {
+            font-size: 1.5rem;
+            color: var(--gray-800);
+            margin: 0;
+        }
+
+        .category-badge {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .resource-card {
+                padding: 1.5rem;
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo_square.jpg" alt="END NF Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">홈</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">환우회 소개</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">환우회 소개</a></li>
+                            <li><a href="about.html#mission">설립 목적</a></li>
+                            <li><a href="about.html#history">연혁</a></li>
+                            <li><a href="support.html">후원 안내</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="medical.html" class="nav-link">
+                            <span class="nav-icon">🏥</span>
+                            <span class="nav-text">질환 정보</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="medical.html">신경섬유종증이란?</a></li>
+                            <li><a href="medical.html#nf1">제1형 (NF1)</a></li>
+                            <li><a href="medical.html#nf2">NF2 관련 신경초종증</a></li>
+                            <li><a href="medical.html#swn">신경초종증 (SWN)</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="news.html" class="nav-link">
+                            <span class="nav-icon">📰</span>
+                            <span class="nav-text">소식</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">활동 소식</a></li>
+                            <li><a href="press.html">언론기사</a></li>
+                            <li><a href="press.html#youtube">유튜브 영상</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="resources.html" class="nav-link active">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">자료실</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="resources.html">도움 자료실</a></li>
+                            <li><a href="resources.html#downloads">다운로드 자료</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="community.html" class="nav-link">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">커뮤니티</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="community.html">커뮤니티 안내</a></li>
+                            <li><a href="https://cafe.naver.com/endnf" target="_blank">네이버 카페</a></li>
+                            <li><a href="contact.html">문의하기</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero" style="padding: 4rem 2rem;">
+        <div class="hero-content">
+            <h1>도움 자료실</h1>
+            <p>신경섬유종증 환우와 가족을 위한 유용한 자료를 모았습니다</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <p class="intro-text">
+                END NF에서 제공하는 다양한 자료들을 다운로드하실 수 있습니다.
+                질환에 대한 이해를 높이고, 환우와 가족들에게 도움이 되는 정보를 담았습니다.
+                자료는 자유롭게 활용하실 수 있으며, 주변에 널리 공유해 주세요.
+            </p>
+
+            <!-- 신경섬유종증 자료 -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h3>신경섬유종증 자료</h3>
+                    <span class="category-badge">3개 자료</span>
+                </div>
+                <div class="grid">
+                    <div class="resource-card animate-on-scroll stagger-1">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/>
+                            </svg>
+                        </div>
+                        <span class="resource-category">팜플렛</span>
+                        <h4 class="resource-title">END NF 소개 팜플렛</h4>
+                        <p class="resource-description">
+                            신경섬유종증과 END NF 환우회에 대한 소개 자료입니다.
+                            질환의 기본 정보와 환우회 활동 내용을 담고 있어 주변에 알리기 좋은 자료입니다.
+                        </p>
+                        <div class="resource-meta">
+                            <span class="resource-type">PDF</span>
+                            <span class="resource-size">약 1MB</span>
+                        </div>
+                        <a href="downloads/END_NF_팜플렛.pdf" class="download-btn" download>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            다운로드
+                        </a>
+                    </div>
+
+                    <div class="resource-card animate-on-scroll stagger-2">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <span class="resource-category">가족 이야기</span>
+                        <h4 class="resource-title">신경섬유종: 한 가족의 희망 여정</h4>
+                        <p class="resource-description">
+                            신경섬유종증을 가진 가족의 실제 이야기를 담은 자료입니다.
+                            진단부터 치료, 일상생활까지 가족들이 함께 이겨낸 희망의 여정을 공유합니다.
+                        </p>
+                        <div class="resource-meta">
+                            <span class="resource-type">PDF</span>
+                            <span class="resource-size">약 8MB</span>
+                        </div>
+                        <a href="downloads/신경섬유종_한_가족의_희망_여정.pdf" class="download-btn" download>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            다운로드
+                        </a>
+                    </div>
+
+                    <div class="resource-card animate-on-scroll stagger-3">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
+                            </svg>
+                        </div>
+                        <span class="resource-category">동화책</span>
+                        <h4 class="resource-title">나만의 특별한 별점무늬: 용기 있는 두리의 이야기</h4>
+                        <p class="resource-description">
+                            신경섬유종증을 가진 아이를 위한 동화책입니다.
+                            '두리'라는 주인공을 통해 자신의 특별함을 인정하고 용기를 갖는 이야기를 담았습니다.
+                        </p>
+                        <div class="resource-meta">
+                            <span class="resource-type">PDF</span>
+                            <span class="resource-size">약 246MB</span>
+                        </div>
+                        <a href="downloads/나만의_특별한_별점무늬_두리의_이야기.pdf" class="download-btn" download>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            다운로드
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 학교폭력 관련 자료 -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h3>학교생활 지원 자료</h3>
+                    <span class="category-badge">2개 자료</span>
+                </div>
+                <div class="grid">
+                    <div class="resource-card animate-on-scroll stagger-1">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                            </svg>
+                        </div>
+                        <span class="resource-category">가이드북</span>
+                        <h4 class="resource-title">2025학년도 학교폭력 사안처리 가이드북</h4>
+                        <p class="resource-description">
+                            학교폭력 발생 시 대처 방법과 사안처리 절차를 안내하는 가이드북입니다.
+                            희귀질환 아동이 학교에서 겪을 수 있는 어려움에 대비하는 데 도움이 됩니다.
+                        </p>
+                        <div class="resource-meta">
+                            <span class="resource-type">PDF</span>
+                            <span class="resource-size">약 4.4MB</span>
+                        </div>
+                        <a href="downloads/학교폭력_사안처리_가이드북_2025.pdf" class="download-btn" download>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            다운로드
+                        </a>
+                    </div>
+
+                    <div class="resource-card animate-on-scroll stagger-2">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                            </svg>
+                        </div>
+                        <span class="resource-category">법률</span>
+                        <h4 class="resource-title">학교폭력예방 및 대책에 관한 법률</h4>
+                        <p class="resource-description">
+                            학교폭력예방법 전문입니다. 학교폭력의 정의, 예방 및 대책, 피해학생 보호 조치 등
+                            법적 권리와 절차를 이해하는 데 도움이 됩니다. (2025년 11월 시행)
+                        </p>
+                        <div class="resource-meta">
+                            <span class="resource-type">PDF</span>
+                            <span class="resource-size">약 161KB</span>
+                        </div>
+                        <a href="downloads/학교폭력예방법_2025.pdf" class="download-btn" download>
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            다운로드
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 안내 문구 -->
+            <div style="background: var(--gray-100); border-radius: 16px; padding: 2rem; text-align: center; margin-top: 2rem;">
+                <p style="margin: 0; color: #666; line-height: 1.8;">
+                    📌 모든 자료는 <strong>비영리 목적</strong>으로 자유롭게 활용하실 수 있습니다.<br>
+                    자료에 대한 문의나 추가 자료 요청은 <a href="contact.html" style="color: var(--primary-blue); font-weight: 600;">문의하기</a>를 이용해 주세요.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <a href="index.html" style="color:white;">END <span style="color:var(--primary-green);">NF</span></a>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">환우회 소개</a>
+                <a href="medical.html">질환 정보</a>
+                <a href="news.html">활동 소식</a>
+                <a href="support.html">후원 안내</a>
+                <a href="community.html">커뮤니티</a>
+                <a href="resources.html">도움 자료실</a>
+                <a href="press.html">언론기사</a>
+            </div>
+            <p>&copy; 2026 END NF. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

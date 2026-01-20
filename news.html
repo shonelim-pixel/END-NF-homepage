@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>활동 소식 - END NF</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .board-list {
+            width: 100%;
+            border-top: 2px solid var(--gray-800);
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .board-list th,
+        .board-list td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        .board-list th {
+            background-color: var(--gray-100);
+            font-weight: 600;
+        }
+
+        .board-list td.title {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo_square.jpg" alt="END NF Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">홈</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">환우회 소개</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">환우회 소개</a></li>
+                            <li><a href="about.html#mission">설립 목적</a></li>
+                            <li><a href="about.html#history">연혁</a></li>
+                            <li><a href="support.html">후원 안내</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="medical.html" class="nav-link">
+                            <span class="nav-icon">🏥</span>
+                            <span class="nav-text">질환 정보</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="medical.html">신경섬유종증이란?</a></li>
+                            <li><a href="medical.html#nf1">제1형 (NF1)</a></li>
+                            <li><a href="medical.html#nf2">NF2 관련 신경초종증</a></li>
+                            <li><a href="medical.html#swn">신경초종증 (SWN)</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="news.html" class="nav-link active">
+                            <span class="nav-icon">📰</span>
+                            <span class="nav-text">소식</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">활동 소식</a></li>
+                            <li><a href="press.html">언론기사</a></li>
+                            <li><a href="press.html#youtube">유튜브 영상</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="resources.html" class="nav-link">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">자료실</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="resources.html">도움 자료실</a></li>
+                            <li><a href="resources.html#downloads">다운로드 자료</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="community.html" class="nav-link">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">커뮤니티</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="community.html">커뮤니티 안내</a></li>
+                            <li><a href="https://cafe.naver.com/endnf" target="_blank">네이버 카페</a></li>
+                            <li><a href="contact.html">문의하기</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero" style="padding: 4rem 2rem;">
+        <div class="hero-content">
+            <h1>활동 소식</h1>
+            <p>END NF의 다양한 활동과 따뜻한 이야기를 전해드립니다.</p>
+        </div>
+    </div>
+
+    <!-- 공지사항 & 언론보도 (탭 처럼 구성하거나 섹션 분리) -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">공지사항 및 언론보도</h2>
+            <div style="overflow-x: auto;">
+                <table class="board-list">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">번호</th>
+                            <th style="width: 15%;">분류</th>
+                            <th style="width: 55%;">제목</th>
+                            <th style="width: 20%;">날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>7</td>
+                            <td><span style="color: var(--primary-blue); font-weight: 600;">공지</span></td>
+                            <td class="title"><a href="#">환우와 가족을 위한 '쉼 콘서트 세미나' 성료</a></td>
+                            <td>2025.11.08</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><span style="color: var(--primary-green); font-weight: 600;">보도</span></td>
+                            <td class="title"><a href="#">"치료 기회 확대하라"… 심평원 앞 급여 기준 개선 촉구 시위</a></td>
+                            <td>2025.08.25</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><span style="color: var(--primary-blue); font-weight: 600;">공지</span></td>
+                            <td class="title"><a href="#">양산부산대병원 신경섬유종증 교육 세미나 개최 안내</a></td>
+                            <td>2025.08.22</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><span style="color: var(--primary-green); font-weight: 600;">해외</span></td>
+                            <td class="title"><a href="#">미국 워싱턴 DC, '2025 NF 컨퍼런스' 개최 소식</a></td>
+                            <td>2025.06.21</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><span style="color: var(--primary-blue); font-weight: 600;">활동</span></td>
+                            <td class="title"><a href="#">'Shine a Light on NF' 인식 개선 캠페인 진행</a></td>
+                            <td>2024.05.17</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><span style="color: var(--primary-green); font-weight: 600;">보도</span></td>
+                            <td class="title"><a href="#">소아 NF1 치료제 '코셀루고' 건강보험 급여 적용 시작</a></td>
+                            <td>2024.01.01</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><span style="color: var(--primary-blue); font-weight: 600;">공지</span></td>
+                            <td class="title"><a href="#">신경섬유종증 환우회(END NF) 설립 발기인 대회</a></td>
+                            <td>2023.09.20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 활동 갤러리 -->
+    <section class="section" style="background-color: var(--gray-100);">
+        <div class="container">
+            <h2 class="section-title">활동 갤러리</h2>
+            <p style="text-align: center;">함께했던 소중한 순간들입니다.</p>
+
+            <div class="gallery">
+                <div class="gallery-item">
+                    <!-- Placeholder image matching the group photo style provided -->
+                    <img src="images/group_photo.jpg" alt="활동 사진">
+                    <div
+                        style="position: absolute; bottom: 0; background: rgba(0,0,0,0.6); color: white; width: 100%; padding: 0.5rem; font-size: 0.9rem;">
+                        2025 송년의 밤
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div
+                        style="width: 100%; height: 100%; background: #ddd; display: flex; align-items: center; justify-content: center; color: #888;">
+                        이미지 준비중
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div
+                        style="width: 100%; height: 100%; background: #ddd; display: flex; align-items: center; justify-content: center; color: #888;">
+                        이미지 준비중
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <a href="index.html" style="color:white;">END <span style="color:var(--primary-green);">NF</span></a>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">환우회 소개</a>
+                <a href="medical.html">질환 정보</a>
+                <a href="news.html">활동 소식</a>
+                <a href="support.html">후원 안내</a>
+                <a href="community.html">커뮤니티</a>
+                <a href="resources.html">도움 자료실</a>
+                <a href="press.html">언론기사</a>
+            </div>
+            <p>&copy; 2026 END NF. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

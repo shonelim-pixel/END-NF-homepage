@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>언론기사 - END NF</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 애니메이션으로 인한 콘텐츠 숨김 방지 */
+        .section,
+        .section .container,
+        .section-title,
+        .news-grid,
+        .news-card,
+        .video-grid,
+        .animate-on-scroll,
+        .animate-fade-in,
+        [class*="stagger-"] {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+        }
+    </style>
+    <style>
+        .news-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 85, 170, 0.15);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+        }
+
+        .news-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-source {
+            font-size: 0.8rem;
+            color: #888;
+            background: var(--gray-100);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            width: fit-content;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-summary {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .news-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .news-link:hover {
+            gap: 0.75rem;
+        }
+
+        .news-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .year-section {
+            margin-bottom: 4rem;
+        }
+
+        .year-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .year-badge {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .year-line {
+            flex-grow: 1;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), transparent);
+            border-radius: 2px;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-card {
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo_square.jpg" alt="END NF Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">홈</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">환우회 소개</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">환우회 소개</a></li>
+                            <li><a href="about.html#mission">설립 목적</a></li>
+                            <li><a href="about.html#history">연혁</a></li>
+                            <li><a href="support.html">후원 안내</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="medical.html" class="nav-link">
+                            <span class="nav-icon">🏥</span>
+                            <span class="nav-text">질환 정보</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="medical.html">신경섬유종증이란?</a></li>
+                            <li><a href="medical.html#nf1">제1형 (NF1)</a></li>
+                            <li><a href="medical.html#nf2">NF2 관련 신경초종증</a></li>
+                            <li><a href="medical.html#swn">신경초종증 (SWN)</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="news.html" class="nav-link active">
+                            <span class="nav-icon">📰</span>
+                            <span class="nav-text">소식</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">활동 소식</a></li>
+                            <li><a href="press.html">언론기사</a></li>
+                            <li><a href="press.html#youtube">유튜브 영상</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="resources.html" class="nav-link">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">자료실</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="resources.html">도움 자료실</a></li>
+                            <li><a href="resources.html#downloads">다운로드 자료</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="community.html" class="nav-link">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">커뮤니티</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="community.html">커뮤니티 안내</a></li>
+                            <li><a href="https://cafe.naver.com/endnf" target="_blank">네이버 카페</a></li>
+                            <li><a href="contact.html">문의하기</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero" style="padding: 4rem 2rem;">
+        <div class="hero-content">
+            <h1>언론기사</h1>
+            <p>신경섬유종증 관련 주요 뉴스와 보도자료</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <p class="intro-text">
+                2020년 이후 신경섬유종증과 관련된 주요 언론 보도와 영상을 모았습니다.
+                치료제 개발, 보험 급여 적용, 연구 성과 등 환우와 가족에게 희망이 되는 소식들입니다.
+            </p>
+
+            <!-- 영상 자료 섹션 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-badge" style="background: linear-gradient(135deg, #FF0000, #CC0000);">▶ 영상</span>
+                    <div class="year-line" style="background: linear-gradient(90deg, #FF0000, transparent);"></div>
+                </div>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #FF0000, #CC0000);">
+                            <span style="font-size: 2rem;">▶ SBS</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #FF0000; color: white;">희망TV SBS</span>
+                            <span class="news-date">2016년 11월 18일</span>
+                            <h3 class="news-title">'신경섬유종'으로 고통받고 있는 10살 여진 양</h3>
+                            <p class="news-summary">
+                                신경 피부 증후군을 앓고 있는 김여진 양의 이야기입니다. 이제 겨우 10살인 여진 양은
+                                익숙해지지 않는 아픔을 늘상 겪고 있습니다. 희망TV에서 소개한 환우 사연입니다.
+                            </p>
+                            <a href="https://programs.sbs.co.kr/culture/sbshopetv/vod/52259/22000206200" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #FF0000, #CC0000);">
+                            <span style="font-size: 2rem;">▶ SBS</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #FF0000; color: white;">세상에 이런일이</span>
+                            <span class="news-date">2016년 10월 20일</span>
+                            <h3 class="news-title">신경섬유종 심현희 씨 - 7억 모금 기적</h3>
+                            <p class="news-summary">
+                                신경섬유종으로 얼굴 형체를 알아보기 어려웠던 심현희 씨의 사연이 방송된 후,
+                                하루 만에 7억원이 모금되었습니다. 이후 1kg의 혹 제거 수술에 성공했습니다.
+                                (안타깝게도 2018년 재활 중 불의의 사고로 별세)
+                            </p>
+                            <a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1003849223" class="news-link" target="_blank" rel="noopener">
+                                관련 기사 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #FF0000, #CC0000);">
+                            <span style="font-size: 2rem;">▶ SBS</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #FF0000; color: white;">세상에 이런일이</span>
+                            <span class="news-date">2017년 5월 11일</span>
+                            <h3 class="news-title">신경섬유종 연규민 할아버지 - 수술 성공</h3>
+                            <p class="news-summary">
+                                신경섬유종으로 일상생활이 어려웠던 연규민 할아버지의 이야기입니다.
+                                7시간이 넘는 대수술 끝에 종양이 완전히 절제되었고, 3주 만에 퇴원하셨습니다.
+                                할아버지는 "아주 개운하다"며 행복해하셨습니다.
+                            </p>
+                            <a href="https://ilyo.co.kr/?ac=article_view&entry_id=247205" class="news-link" target="_blank" rel="noopener">
+                                관련 기사 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #0066B3, #004080);">
+                            <span style="font-size: 1.5rem;">🏥 아산병원</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #0066B3; color: white;">서울아산병원</span>
+                            <span class="news-date">2023년</span>
+                            <h3 class="news-title">[리얼스토리] 포기하지 말자는 약속 - 신경섬유종 이태경 편</h3>
+                            <p class="news-summary">
+                                서울아산병원에서 제작한 신경섬유종증 환아 이태경 군의 이야기입니다.
+                                이범희 교수와 함께 질환을 이겨나가는 가족의 희망적인 여정을 담았습니다.
+                                환자와 가족들에게 용기를 주는 영상입니다.
+                            </p>
+                            <a href="https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32395" class="news-link" target="_blank" rel="noopener">
+                                정보 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #1a73e8, #0d47a1);">
+                            <span style="font-size: 1.5rem;">📺 의학채널</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #1a73e8; color: white;">의학채널 비온뒤</span>
+                            <span class="news-date">2022년~</span>
+                            <h3 class="news-title">홍혜걸 박사의 신경섬유종증 관련 영상</h3>
+                            <p class="news-summary">
+                                의학전문기자 홍혜걸 박사가 운영하는 유튜브 채널입니다.
+                                구독자 39만명을 보유하고 있으며, 다양한 희귀질환과 건강 정보를 다루고 있습니다.
+                                신경섬유종증 관련 영상도 확인해보세요.
+                            </p>
+                            <a href="https://www.youtube.com/@aftertherain_official" class="news-link" target="_blank" rel="noopener">
+                                채널 방문하기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #00a86b, #007a4d);">
+                            <span style="font-size: 1.5rem;">📚 의대도서관</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #00a86b; color: white;">청년의사 의대도서관</span>
+                            <span class="news-date">2020년~</span>
+                            <h3 class="news-title">의학전문 유튜브 채널 '의대도서관'</h3>
+                            <p class="news-summary">
+                                청년의사에서 기획한 의학전문방송으로, 전문가의, 전문가에 의한, 전문가를 위한 채널입니다.
+                                희귀질환 포함 다양한 의학 정보를 다루고 있습니다.
+                                신경섬유종증 관련 콘텐츠를 검색해보세요.
+                            </p>
+                            <a href="https://www.youtube.com/@MedLibrary" class="news-link" target="_blank" rel="noopener">
+                                채널 방문하기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- YTN 뉴스 -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #E31937, #B71C1C);">
+                            <span style="font-size: 1.5rem;">▶ YTN</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #E31937; color: white;">YTN</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">"연한 커피색 반점 주의"...신경섬유종증, 방치하면 '백약이 무효'</h3>
+                            <p class="news-summary">
+                                YTN에서 보도한 신경섬유종증 관련 뉴스입니다. 피부에 나타나는 연한 커피색 반점이
+                                신경섬유종증의 초기 증상일 수 있으며, 조기 발견과 치료의 중요성을 알리고 있습니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=hbKG1tXr-mc" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #E31937, #B71C1C);">
+                            <span style="font-size: 1.5rem;">▶ YTN 사이언스</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #E31937; color: white;">YTN 사이언스</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">"연한 커피색 반점 주의"...신경섬유종증, 방치하면 '백약이 무효'</h3>
+                            <p class="news-summary">
+                                YTN 사이언스에서 방송한 신경섬유종증 특집입니다. 질환의 증상, 진단, 치료에 대해
+                                전문가 인터뷰와 함께 심층적으로 다루고 있습니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=tM80TxbNsD0" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- 월간 이.범.희 시리즈 -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #0066B3, #004080);">
+                            <span style="font-size: 1.2rem; text-align: center;">🎬 월간 이.범.희<br>Ep.1</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #0066B3; color: white;">서울아산병원</span>
+                            <span class="news-date">2023년</span>
+                            <h3 class="news-title">[월간 이.범.희] Ep.1 커피반점이 보이면 의심하라! 신경섬유종증</h3>
+                            <p class="news-summary">
+                                서울아산병원 이범희 교수의 월간 시리즈 첫 번째 에피소드입니다.
+                                신경섬유종증의 대표적인 증상인 카페오레 반점에 대해 자세히 설명하고,
+                                조기 발견의 중요성을 알립니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=vB0vIhtLjmo" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #0066B3, #004080);">
+                            <span style="font-size: 1.2rem; text-align: center;">🎬 월간 이.범.희<br>Ep.4</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #0066B3; color: white;">서울아산병원</span>
+                            <span class="news-date">2023년</span>
+                            <h3 class="news-title">[월간 이.범.희] Ep.4 커피반점이 없는 신경섬유종증 2형</h3>
+                            <p class="news-summary">
+                                이범희 교수의 네 번째 에피소드로, 신경섬유종증 2형에 대해 다룹니다.
+                                1형과 달리 커피반점이 나타나지 않는 2형의 특징과 진단, 치료에 대해 설명합니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=kbmtG9tGqrU" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- 의학채널 비온뒤 -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #1a73e8, #0d47a1);">
+                            <span style="font-size: 1.2rem; text-align: center;">📺 비온뒤<br>신경섬유종증의 날</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #1a73e8; color: white;">의학채널 비온뒤</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">[신경섬유종증의 날] 커피색 반점이 신호일 수 있습니다 – 증상·진단·치료 총정리</h3>
+                            <p class="news-summary">
+                                의학채널 비온뒤에서 신경섬유종증의 날을 맞아 제작한 특집 영상입니다.
+                                서울아산병원 이범희 교수가 출연하여 증상, 진단, 치료에 대해 총정리합니다. (55분)
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=GghiLiwlMEA" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #1a73e8, #0d47a1);">
+                            <span style="font-size: 1.2rem; text-align: center;">📺 비온뒤<br>최신 치료지견</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #1a73e8; color: white;">의학채널 비온뒤</span>
+                            <span class="news-date">2023년</span>
+                            <h3 class="news-title">신경섬유종 질환 관리와 치료의 최신지견</h3>
+                            <p class="news-summary">
+                                신경섬유종증의 최신 치료법과 관리 방법에 대한 전문가 강의입니다.
+                                코셀루고를 포함한 약물 치료와 수술적 치료, 장기 관리 전략을 다룹니다. (1시간)
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=VbCGGGYvh90" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- 엔젤스푼TV -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #FF6B6B, #EE5A24);">
+                            <span style="font-size: 1.2rem; text-align: center;">🥄 엔젤스푼TV<br>1부</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #FF6B6B; color: white;">엔젤스푼TV</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">몸 곳곳에 발생하는 신경섬유종증, 미리 예방할 수 있다? - 1부</h3>
+                            <p class="news-summary">
+                                엔젤스푼TV에서 제작한 신경섬유종증 특집 1부입니다. 질환의 원인과 증상,
+                                진단 방법에 대해 알기 쉽게 설명하고 예방의 중요성을 다룹니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=O5USgh69xug" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #FF6B6B, #EE5A24);">
+                            <span style="font-size: 1.2rem; text-align: center;">🥄 엔젤스푼TV<br>2부</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #FF6B6B; color: white;">엔젤스푼TV</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">아파서 잠도 못 잤는데…1주 만에 통증이 사라졌다? - 2부</h3>
+                            <p class="news-summary">
+                                신경섬유종증 특집 2부로, 실제 환자의 치료 경험과 코셀루고 약물 치료 효과를 다룹니다.
+                                치료 후 통증 감소와 삶의 질 개선 사례를 소개합니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=sJe0JdylcfA" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- 따뜻한 환자이야기 -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #F9A825, #F57F17);">
+                            <span style="font-size: 1.2rem; text-align: center;">💛 따뜻한<br>환자이야기</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #F9A825; color: white;">따뜻한 환자이야기</span>
+                            <span class="news-date">2023년</span>
+                            <h3 class="news-title">생후 100일에 알게 된 희귀질환 신경섬유종증 환아 부모님의 이야기</h3>
+                            <p class="news-summary">
+                                생후 100일에 신경섬유종증 진단을 받은 아이의 부모님 이야기입니다.
+                                진단 과정에서의 어려움, 치료 여정, 그리고 희망의 메시지를 전합니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=yAphxe9XjNI" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- 희귀질환 바로알기 -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #26A69A, #00897B);">
+                            <span style="font-size: 1.2rem; text-align: center;">🔍 희귀질환<br>바로알기</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #26A69A; color: white;">희귀질환 바로알기</span>
+                            <span class="news-date">2023년</span>
+                            <h3 class="news-title">[희귀질환 바로알기] 12. 신경섬유종증</h3>
+                            <p class="news-summary">
+                                희귀질환 바로알기 시리즈 12편입니다. 신경섬유종증에 대해 일반인도 이해하기 쉽게
+                                설명하고, 환자와 가족들이 알아야 할 정보를 제공합니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=O6RhTF2POlM" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- SBS 뉴스 -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #FF0000, #CC0000);">
+                            <span style="font-size: 1.5rem;">▶ SBS 뉴스</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #FF0000; color: white;">SBS 뉴스</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">'3억' 없으면 종양이 온몸에…유일한 동아줄인데 '싹둑'</h3>
+                            <p class="news-summary">
+                                SBS 뉴스에서 보도한 신경섬유종증 환자들의 치료비 부담에 관한 뉴스입니다.
+                                연간 3억원에 달하는 치료비와 급여 적용의 필요성을 다루고 있습니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=LpbZp5_nRFM" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- 잼뱅TV -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #9C27B0, #7B1FA2);">
+                            <span style="font-size: 1.2rem; text-align: center;">💜 잼뱅TV<br>환자 이야기</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #9C27B0; color: white;">잼뱅TV</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">20대 여성이 신경섬유종 뇌종양 겪고 받는 오해와 현실</h3>
+                            <p class="news-summary">
+                                20대 여성 환자가 직접 출연하여 신경섬유종 뇌종양을 겪으며 받는 오해와 현실에 대해
+                                솔직하게 이야기합니다. 환자의 실제 경험과 목소리를 담은 영상입니다.
+                            </p>
+                            <a href="https://www.youtube.com/watch?v=QerPFnyi0NU" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- 쇼츠 -->
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #FF0000, #CC0000);">
+                            <span style="font-size: 1.2rem; text-align: center;">📱 Shorts<br>짧은 영상</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source" style="background: #FF0000; color: white;">YouTube Shorts</span>
+                            <span class="news-date">2024년</span>
+                            <h3 class="news-title">신경섬유종증 관련 쇼츠 영상</h3>
+                            <p class="news-summary">
+                                신경섬유종증에 대해 짧고 간결하게 설명하는 쇼츠 영상입니다.
+                                바쁜 일상에서도 쉽게 볼 수 있는 1분 미만의 영상입니다.
+                            </p>
+                            <a href="https://www.youtube.com/shorts/7zlyCr51Zao" class="news-link" target="_blank" rel="noopener">
+                                영상 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 2025년 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-badge">2025</span>
+                    <div class="year-line"></div>
+                </div>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #0066B3, #004080);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">🏥 서울아산병원<br>연구 발표</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">서울아산병원 뉴스룸</span>
+                            <span class="news-date">2025년 1월 23일</span>
+                            <h3 class="news-title">신경섬유종증 대표증상 '총상신경섬유종' 치료제 효과 국내 첫 발표</h3>
+                            <p class="news-summary">
+                                서울아산병원 연구팀이 셀루메티닙 치료제 적용 결과 총상신경섬유종 크기가 평균 41% 감소했다고 발표했습니다.
+                                특히 성인 환자에게도 효과가 있음을 세계 최초로 입증했으며, 카페오레 반점 농도가 30% 이상 옅어지고
+                                소아 환자의 성장 속도가 연 5.8cm에서 8.2cm로 상승하는 등 다양한 치료 효과가 확인되었습니다.
+                            </p>
+                            <a href="https://news.amc.seoul.kr/news/con/detail.do?cntId=10314" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #E53935, #B71C1C);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">✊ 환우회<br>급여 촉구</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">청년일보</span>
+                            <span class="news-date">2025년 8월 21일</span>
+                            <h3 class="news-title">신경섬유종 환우회, '코셀루고' 급여 기준 개선 촉구</h3>
+                            <p class="news-summary">
+                                신경섬유종증환우회가 건강보험심사평가원 앞에서 성인 환자 급여 중단에 항의하는 시위를 진행했습니다.
+                                환우회는 "신경섬유종증은 성인이 됐다고 멈추는 병이 아니라 시간이 지날수록 악화되는 진행성 질환"이라며
+                                모든 연령대 환자가 동등하게 치료받을 수 있도록 기준 확대를 촉구했습니다.
+                            </p>
+                            <a href="https://www.youthdaily.co.kr/news/article.html?no=193557" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #7B1FA2, #4A148C);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">🔬 신약 연구<br>아탈루렌</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">이투데이</span>
+                            <span class="news-date">2025년 12월</span>
+                            <h3 class="news-title">서울아산병원, 신경섬유종 1형에 약물 아탈루렌 치료 가능성 확인</h3>
+                            <p class="news-summary">
+                                이범희 서울아산병원 교수팀이 넌센스 돌연변이를 가진 신경섬유종 1형 환자를 대상으로 아탈루렌 약물의 치료 가능성을
+                                새롭게 확인했습니다. 이 연구는 앞으로 넌센스 돌연변이를 가진 환자에게 맞춤 치료를 제공하는 데
+                                중요한 기반이 될 것으로 기대됩니다.
+                            </p>
+                            <a href="https://www.etoday.co.kr/news/view/2539864" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #00897B, #004D40);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">🗺️ 전국 확대<br>지역 치료</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">닥터닥터</span>
+                            <span class="news-date">2025년 1월</span>
+                            <h3 class="news-title">"신경섬유종증 1형 치료, 지역 환자들에게도 열린 희망"</h3>
+                            <p class="news-summary">
+                                코셀루고 처방이 전국으로 확대되면서 부산·경남·울산 지역 환자들의 치료 접근성이 크게 개선되었습니다.
+                                그동안 서울까지 와야 했던 지방 환자들이 가까운 병원에서 치료를 받을 수 있게 되어
+                                환자와 보호자의 부담이 크게 줄어들 전망입니다.
+                            </p>
+                            <a href="http://www.docdocdoc.co.kr/news/articleView.html?idxno=3025369" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 2024년 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-badge">2024</span>
+                    <div class="year-line"></div>
+                </div>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #1565C0, #0D47A1);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">💊 급여 적용<br>코셀루고</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">메디컬타임즈</span>
+                            <span class="news-date">2024년 1월 1일</span>
+                            <h3 class="news-title">아스트라제네카 신경섬유종증 치료제 코셀루고 급여 적용</h3>
+                            <p class="news-summary">
+                                코셀루고가 2024년 1월 1일부터 건강보험 급여가 적용되었습니다.
+                                이로써 연간 약 2억 800만원을 부담하던 환자 투약비용이 최대 1,014만원까지 절감됩니다.
+                                수술이 불가능한 총상신경섬유종을 동반한 만 3세~18세 소아 환자가 대상입니다.
+                            </p>
+                            <a href="https://www.medicaltimes.com/Mobile/News/NewsView.html?ID=1156777" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #F57C00, #E65100);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">🎉 환우회<br>문화행사</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">히트뉴스</span>
+                            <span class="news-date">2024년 5월 25일</span>
+                            <h3 class="news-title">신경섬유종 환우회, 전국 환우·가족 위한 문화행사 성료</h3>
+                            <p class="news-summary">
+                                신경섬유종 환우회가 여의도 국회 의원회관에서 첫 문화 행사를 성공적으로 개최했습니다.
+                                2023년 12월 환우회 발족 이후 처음 마련된 이 행사에서 환우와 가족들이 모여
+                                질환과 치료에 대한 정보를 나누고 즐거운 시간을 보냈습니다.
+                            </p>
+                            <a href="http://www.hitnews.co.kr/news/articleView.html?idxno=55000" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #5E35B1, #311B92);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">👨‍⚕️ 성인 환자<br>임상 3상</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">메디칼업저버</span>
+                            <span class="news-date">2024년 11월</span>
+                            <h3 class="news-title">코셀루고, 신경섬유종증 1형 성인 환자에게도 효과 확인</h3>
+                            <p class="news-summary">
+                                아스트라제네카와 MSD가 성인 환자 대상 글로벌 임상 3상 KOMET에서 긍정적 결과를 발표했습니다.
+                                코셀루고는 성인 환자에서 위약 대비 통계적으로 유의한 객관적 반응률(ORR)을 입증하며
+                                1차 평가변수를 충족했습니다. 전 세계 신경섬유종증 환자의 약 70%가 성인입니다.
+                            </p>
+                            <a href="https://www.monews.co.kr/news/articleView.html?idxno=400785" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #00ACC1, #006064);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">👶 소아 환자<br>보험 적용</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">코메디닷컴</span>
+                            <span class="news-date">2024년 1월</span>
+                            <h3 class="news-title">소아 희귀병 신경섬유종증 치료제 '코셀루고' 보험 적용</h3>
+                            <p class="news-summary">
+                                정부가 중증·희귀질환 신약 접근성 강화를 위해 소아 삶의 질 개선 약제는 경제성 평가 생략이 가능하도록
+                                규정을 개정해 급여한 두 번째 사례입니다. 신경섬유종증 1형 환자 20~50%가 겪는 총상신경섬유종은
+                                신체 기형, 시력·청력·인지 능력 손상을 유발합니다.
+                            </p>
+                            <a href="https://kormedi.com/1650572/" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 2023년 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-badge">2023</span>
+                    <div class="year-line"></div>
+                </div>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #8D6E63, #5D4037);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">☕ 카페오레<br>반점 진단</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">머니투데이</span>
+                            <span class="news-date">2023년 5월 30일</span>
+                            <h3 class="news-title">아이 몸에 '커피 반점'? 이 희귀질환 의심…"무조건 무서워마세요"</h3>
+                            <p class="news-summary">
+                                피부에 밀크커피색 반점(카페오레 반점)이 6개 이상 나타나면 신경섬유종증을 의심해볼 수 있습니다.
+                                하지만 조기 발견을 통해 치료와 관리가 가능한 병이므로 무조건 두려워할 필요는 없습니다.
+                                정확한 진단과 정기적인 검진이 중요합니다.
+                            </p>
+                            <a href="https://news.mt.co.kr/mtview.php?no=2023053013113427199" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #43A047, #1B5E20);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">💊 최초 치료제<br>코셀루고</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">메디파나뉴스</span>
+                            <span class="news-date">2023년</span>
+                            <h3 class="news-title">'신경섬유종'에도 치료제가 생겼다‥'코셀루고'의 첫걸음</h3>
+                            <p class="news-summary">
+                                코셀루고는 국내 신경섬유종증 1형 환자를 위한 최초이자 유일한 치료제입니다.
+                                환아 중 약 66%가 치료에 반응하며, 그 중 82%는 1년 이상 효과가 지속됩니다.
+                                건강보험 급여 적용을 위한 논의가 진행되고 있습니다.
+                            </p>
+                            <a href="https://www.medipana.com/article/view.php?news_idx=283057&sch_menu=1&sch_gubun=5" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 2022년 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-badge">2022</span>
+                    <div class="year-line"></div>
+                </div>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #546E7A, #263238);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">🏥 희귀질환자<br>삶의 질</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">메디칼업저버</span>
+                            <span class="news-date">2022년</span>
+                            <h3 class="news-title">희귀질환자들 "길지 않은 삶, 인간답게 살고 싶다"</h3>
+                            <p class="news-summary">
+                                희귀질환 환자들의 치료 접근성 문제와 삶의 질에 대한 심층 기사입니다.
+                                신경섬유종증을 포함한 희귀질환 환자들이 겪는 어려움과 치료제 급여 적용의 필요성을 다루었습니다.
+                                2022년 기준 국내 20세 미만 환자는 약 2,100명으로 추산됩니다.
+                            </p>
+                            <a href="https://www.monews.co.kr/news/articleView.html?idxno=325141" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #D84315, #BF360C);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">💪 극복해요<br>희귀질환</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">헬스경향</span>
+                            <span class="news-date">2022년</span>
+                            <h3 class="news-title">[극복해요! 희귀질환] 예측할 수 없는 종양 '제1형 신경섬유종증'</h3>
+                            <p class="news-summary">
+                                세브란스병원 오지영 교수는 "제1형 신경섬유종증은 완치가 없고 평생 환자를 괴롭히는 질환"이라며
+                                "얼굴, 목 등에 종양이 발생하면 심리적 스트레스가 크다"고 설명했습니다.
+                                질환에 대한 사회적 인식 개선이 필요합니다.
+                            </p>
+                            <a href="https://www.k-health.com/news/articleView.html?idxno=53025" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 2021년 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-badge">2021</span>
+                    <div class="year-line"></div>
+                </div>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #2E7D32, #1B5E20);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">✅ 식약처<br>허가 승인</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">헬스경향</span>
+                            <span class="news-date">2021년 5월 28일</span>
+                            <h3 class="news-title">제1형 신경섬유종증환자 치료 길 열려…'셀루메티닙' 허가</h3>
+                            <p class="news-summary">
+                                식품의약품안전처가 코셀루고(성분명 셀루메티닙)를 신경섬유종증 1형 소아환자 치료제로 허가했습니다.
+                                코셀루고는 신속심사 제도를 통해 허가받은 최초의 희귀의약품이 되었습니다.
+                                만 3세 이상의 수술 불가능한 총상신경섬유종 환자가 대상입니다.
+                            </p>
+                            <a href="http://www.k-health.com/news/articleView.html?idxno=69425" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #795548, #4E342E);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">🔍 조기 진단<br>중요성</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">더메디컬</span>
+                            <span class="news-date">2021년</span>
+                            <h3 class="news-title">"피부 커피반점이 신경섬유종증 시작…병원 표류하는 환자 많아"</h3>
+                            <p class="news-summary">
+                                신경섬유종증은 초기에 피부의 카페오레 반점으로 시작되는 경우가 많지만,
+                                정확한 진단을 받기까지 여러 병원을 전전하는 환자들이 많습니다.
+                                조기 진단과 전문 의료진의 체계적인 관리가 중요합니다.
+                            </p>
+                            <a href="https://www.themedical.kr/news/articleView.html?idxno=1567" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 2020년 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-badge">2020</span>
+                    <div class="year-line"></div>
+                </div>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-image-placeholder" style="background: linear-gradient(135deg, #1976D2, #0D47A1);">
+                            <span style="font-size: 1.2rem; text-align: center; padding: 0 1rem;">🇺🇸 미국 FDA<br>최초 승인</span>
+                        </div>
+                        <div class="news-content">
+                            <span class="news-source">히트뉴스</span>
+                            <span class="news-date">2020년</span>
+                            <h3 class="news-title">3천명 중 1명 꼴 신경섬유종증… 대증치료 넘어야</h3>
+                            <p class="news-summary">
+                                2020년 미국 FDA가 역사상 최초로 셀루메티닙(코셀루고)을 신경섬유종증 1형 소아 환자 대상으로 승인했습니다.
+                                MEK 억제제인 이 약물은 종양 세포가 자라지 못하도록 차단하는 작용을 합니다.
+                                이는 신경섬유종증 치료의 새로운 전환점이 되었습니다.
+                            </p>
+                            <a href="http://www.hitnews.co.kr/news/articleView.html?idxno=35593" class="news-link" target="_blank" rel="noopener">
+                                기사 원문 보기
+                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 안내 문구 -->
+            <div style="background: var(--gray-100); border-radius: 16px; padding: 2rem; text-align: center; margin-top: 2rem;">
+                <p style="margin: 0; color: #666; line-height: 1.8;">
+                    📰 기사 내용은 해당 언론사에 저작권이 있습니다.<br>
+                    추가 기사 제보나 문의는 <a href="contact.html" style="color: var(--primary-blue); font-weight: 600;">문의하기</a>를 이용해 주세요.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <a href="index.html" style="color:white;">END <span style="color:var(--primary-green);">NF</span></a>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">환우회 소개</a>
+                <a href="medical.html">질환 정보</a>
+                <a href="news.html">활동 소식</a>
+                <a href="support.html">후원 안내</a>
+                <a href="community.html">커뮤니티</a>
+                <a href="resources.html">도움 자료실</a>
+                <a href="press.html">언론기사</a>
+            </div>
+            <p>&copy; 2026 END NF. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
