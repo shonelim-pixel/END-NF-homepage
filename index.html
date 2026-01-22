@@ -7,157 +7,921 @@
     <title>END NF - 신경섬유종증 환우회</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 3D Motion Hero Styles */
+        .hero-3d {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #0a1628;
+        }
+
+        .hero-3d video,
+        .hero-3d .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-3d .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 85, 170, 0.7) 0%, rgba(0, 40, 80, 0.8) 100%);
+            z-index: 2;
+        }
+
+        .hero-3d .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 12vw, 10rem);
+            font-weight: 900;
+            color: white;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: heroTitleIn 1.2s ease-out 0.3s forwards;
+        }
+
+        .hero-title .highlight {
+            display: block;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: heroSubtitleIn 1s ease-out 0.8s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: #0a1628;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroCTAIn 0.8s ease-out 1.2s forwards;
+        }
+
+        .hero-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
+        }
+
+        .hero-cta svg {
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: white;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+        }
+
+        .scroll-indicator .arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: rotate(45deg);
+            animation: scrollBounce 2s infinite;
+        }
+
+        @keyframes heroTitleIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroSubtitleIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroCTAIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(10px);
+            }
+        }
+
+        /* Big Text Section */
+        .big-text-section {
+            padding: 15vh 2rem;
+            background: #fafafa;
+            overflow: hidden;
+        }
+
+        .big-text {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: #1a1a1a;
+            max-width: 1400px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .big-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .big-text .accent {
+            color: var(--primary-blue);
+        }
+
+        /* Image Gallery Section */
+        .gallery-section {
+            padding: 10vh 0;
+            background: white;
+            overflow: hidden;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .gallery-item:nth-child(2) {
+            transform: translateY(100px) scale(0.95);
+        }
+
+        .gallery-item:nth-child(2).visible {
+            transform: translateY(40px) scale(1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Feature Cards Section */
+        .features-section {
+            padding: 15vh 2rem;
+            background: #0a1628;
+            color: white;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 8rem;
+        }
+
+        .features-header h2 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .features-header h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card .link {
+            color: #00d4ff;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-card:hover .link {
+            gap: 1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 15vh 2rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #0077cc 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 20vh 2rem;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .cta-content h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .cta-btn.primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .cta-btn.primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 85, 170, 0.3);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .cta-btn.secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Minimal Header for 3D page */
+        .header-minimal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .header-minimal.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-minimal .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .header-minimal.scrolled .logo-text {
+            color: #1a1a1a;
+        }
+
+        .header-minimal .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .header-minimal .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .header-minimal.scrolled .nav-links a {
+            color: #666;
+        }
+
+        .header-minimal .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .header-minimal.scrolled .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .header-minimal .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .header-minimal .menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: white;
+            margin: 6px 0;
+            transition: all 0.3s ease;
+        }
+
+        .header-minimal.scrolled .menu-btn span {
+            background: #1a1a1a;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-minimal .nav-links {
+                display: none;
+            }
+
+            .header-minimal .menu-btn {
+                display: block;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: clamp(2.5rem, 15vw, 5rem);
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Footer Modern */
+        .footer-modern {
+            background: #0a1628;
+            color: white;
+            padding: 6rem 2rem 3rem;
+        }
+
+        .footer-modern .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-modern .footer-brand h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .footer-modern .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+
+        .footer-modern .footer-col h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-modern .footer-col a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-modern .footer-col a:hover {
+            color: #00d4ff;
+        }
+
+        .footer-modern .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .footer-modern .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: rgba(10, 22, 40, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: #00d4ff;
+            padding-left: 1rem;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+    </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="nav-container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo_square.jpg" alt="END NF Logo">
-                </a>
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link active">
-                            <span class="nav-icon">🏠</span>
-                            <span class="nav-text">홈</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">
-                            <span class="nav-icon">👥</span>
-                            <span class="nav-text">환우회 소개</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html">환우회 소개</a></li>
-                            <li><a href="about.html#mission">설립 목적</a></li>
-                            <li><a href="about.html#history">연혁</a></li>
-                            <li><a href="support.html">후원 안내</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="medical.html" class="nav-link">
-                            <span class="nav-icon">🏥</span>
-                            <span class="nav-text">질환 정보</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="medical.html">신경섬유종증이란?</a></li>
-                            <li><a href="medical.html#nf1">제1형 (NF1)</a></li>
-                            <li><a href="medical.html#nf2">NF2 관련 신경초종증</a></li>
-                            <li><a href="medical.html#swn">신경초종증 (SWN)</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="news.html" class="nav-link">
-                            <span class="nav-icon">📰</span>
-                            <span class="nav-text">소식</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="news.html">활동 소식</a></li>
-                            <li><a href="press.html">언론기사</a></li>
-                            <li><a href="press.html#youtube">유튜브 영상</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="resources.html" class="nav-link">
-                            <span class="nav-icon">📚</span>
-                            <span class="nav-text">자료실</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="resources.html">도움 자료실</a></li>
-                            <li><a href="resources.html#downloads">다운로드 자료</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="community.html" class="nav-link">
-                            <span class="nav-icon">💬</span>
-                            <span class="nav-text">커뮤니티</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="community.html">커뮤니티 안내</a></li>
-                            <li><a href="https://cafe.naver.com/endnf" target="_blank">네이버 카페</a></li>
-                            <li><a href="contact.html">문의하기</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+    <!-- Minimal Header -->
+    <header class="header-minimal" id="header">
+        <a href="index.html" class="logo-text">END NF</a>
+        <ul class="nav-links">
+            <li><a href="about.html">환우회 소개</a></li>
+            <li><a href="medical.html">질환 정보</a></li>
+            <li><a href="news.html">소식</a></li>
+            <li><a href="resources.html">자료실</a></li>
+            <li><a href="community.html">커뮤니티</a></li>
+        </ul>
+        <button class="menu-btn" id="menuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
-    <section class="hero"
-        style="background: linear-gradient(rgba(0, 85, 170, 0.8), rgba(0, 85, 170, 0.8)), url('images/group_photo.jpg'); background-size: cover; background-position: center;">
+    <!-- 3D Hero Section -->
+    <section class="hero-3d">
+        <div class="hero-bg-image" style="background: url('images/group_photo.jpg') center/cover;"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>신경섬유종증 환우회<br>END NF</h1>
-            <p>우리는 신경섬유종증 정복을 위해 함께합니다.<br>환우와 가족들에게 희망의 빛이 되겠습니다.</p>
-            <a href="about.html" class="btn btn-white">환우회 소개 보기</a>
+            <h1 class="hero-title">
+                함께라서<br>
+                <span class="highlight">희망입니다</span>
+            </h1>
+            <p class="hero-subtitle">
+                신경섬유종증 환우와 가족들이 함께 모여<br>
+                서로를 위로하고, 정보를 나누고, 희망을 키워갑니다.
+            </p>
+            <a href="about.html" class="hero-cta">
+                환우회 알아보기
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="arrow"></div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <img src="images/logo_square.jpg" alt="END NF Logo"
-                    style="max-width: 150px; margin-bottom: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                <h2 class="section-title">함께 만드는 희망</h2>
-                <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto; word-break: keep-all;">
-                    END NF는 신경섬유종증(Neurofibromatosis) 환우들의 권익 보호와 삶의 질 향상, 그리고 질환 극복을 위해 설립되었습니다.
-                    서로의 아픔을 나누고, 최신 의료 정보를 공유하며, 치료제 개발을 위한 목소리를 높이고 있습니다.
-                </p>
-            </div>
+    <!-- Big Text Section -->
+    <section class="big-text-section">
+        <p class="big-text" data-animate>
+            <span class="accent">END NF</span>는 신경섬유종증 환우와 가족들의
+            <span class="accent">따뜻한 안식처</span>입니다.
+        </p>
+    </section>
 
-            <div class="grid">
-                <div class="card">
-                    <h3>질환 정보</h3>
-                    <p>신경섬유종증(NF1, NF2, Schwannomatosis)에 대한 올바른 의학 정보와 관리법을 안내합니다.</p>
-                    <a href="medical.html"
-                        style="color: var(--primary-blue); font-weight: 600; margin-top: 1rem; display: inline-block;">자세히
-                        보기 &rarr;</a>
-                </div>
-                <div class="card">
-                    <h3>활동 소식</h3>
-                    <p>환우회의 다양한 활동 모습과 공지사항, 언론 보도 내용을 전해드립니다.</p>
-                    <a href="news.html"
-                        style="color: var(--primary-blue); font-weight: 600; margin-top: 1rem; display: inline-block;">소식
-                        보기 &rarr;</a>
-                </div>
-                <div class="card">
-                    <h3>커뮤니티</h3>
-                    <p>환우들과 소통하고 정보를 나누는 공간입니다. 네이버 카페와 오픈채팅방에서 함께 이야기해요.</p>
-                    <a href="community.html"
-                        style="color: var(--primary-blue); font-weight: 600; margin-top: 1rem; display: inline-block;">참여하기
-                        &rarr;</a>
-                </div>
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <div class="gallery-item" data-animate>
+                <img src="images/group_photo.jpg" alt="END NF 활동">
+            </div>
+            <div class="gallery-item" data-animate>
+                <img src="images/end_nf_heart.png" alt="END NF 로고">
+            </div>
+            <div class="gallery-item" data-animate>
+                <img src="images/group_photo.jpg" alt="환우회 모임">
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="logo">
-                <a href="index.html" style="color:white;">END <span style="color:var(--primary-green);">NF</span></a>
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-header">
+            <h2 data-animate>우리가 하는 일</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card" data-animate>
+                <div class="icon">🏥</div>
+                <h3>질환 정보 제공</h3>
+                <p>NF1, NF2, 신경초종증에 대한 최신 의학 정보와 치료법, 일상 관리법을 안내합니다.</p>
+                <a href="medical.html" class="link">
+                    자세히 보기
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
-            <div class="footer-links">
+            <div class="feature-card" data-animate>
+                <div class="icon">🤝</div>
+                <h3>환우 커뮤니티</h3>
+                <p>같은 아픔을 가진 환우들이 서로 소통하고 위로하며, 경험과 정보를 나눕니다.</p>
+                <a href="community.html" class="link">
+                    참여하기
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="feature-card" data-animate>
+                <div class="icon">📚</div>
+                <h3>자료 및 지원</h3>
+                <p>동화책, 학교폭력 대응 가이드 등 다양한 자료와 도움이 되는 정보를 제공합니다.</p>
+                <a href="resources.html" class="link">
+                    자료실 보기
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item" data-animate>
+                <div class="stat-number">3,000+</div>
+                <div class="stat-label">추정 국내 환자 수</div>
+            </div>
+            <div class="stat-item" data-animate>
+                <div class="stat-number">2023</div>
+                <div class="stat-label">환우회 설립년도</div>
+            </div>
+            <div class="stat-item" data-animate>
+                <div class="stat-number">∞</div>
+                <div class="stat-label">함께하는 희망</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 data-animate>함께해 주세요</h2>
+            <p>
+                END NF는 환우 여러분의 참여와 관심으로 성장합니다.<br>
+                네이버 카페에서 더 많은 이야기를 나눠보세요.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://cafe.naver.com/endnf" target="_blank" class="cta-btn primary">네이버 카페 가입</a>
+                <a href="support.html" class="cta-btn secondary">후원 안내</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Footer -->
+    <footer class="footer-modern">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>END NF</h3>
+                <p>신경섬유종증 환우와 가족들이 함께 모여<br>희망을 나누는 공간입니다.</p>
+            </div>
+            <div class="footer-col">
+                <h4>바로가기</h4>
                 <a href="about.html">환우회 소개</a>
                 <a href="medical.html">질환 정보</a>
                 <a href="news.html">활동 소식</a>
-                <a href="support.html">후원 안내</a>
-                <a href="community.html">커뮤니티</a>
+            </div>
+            <div class="footer-col">
+                <h4>자료</h4>
                 <a href="resources.html">도움 자료실</a>
                 <a href="press.html">언론기사</a>
+                <a href="support.html">후원 안내</a>
             </div>
+            <div class="footer-col">
+                <h4>커뮤니티</h4>
+                <a href="https://cafe.naver.com/endnf" target="_blank">네이버 카페</a>
+                <a href="contact.html">문의하기</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
             <p>&copy; 2026 END NF. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with data-animate attribute
+        document.querySelectorAll('[data-animate]').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        let mobileMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenuOpen = !mobileMenuOpen;
+
+            if (mobileMenuOpen) {
+                // Create mobile menu if doesn't exist
+                let mobileNav = document.querySelector('.mobile-nav');
+                if (!mobileNav) {
+                    mobileNav = document.createElement('div');
+                    mobileNav.className = 'mobile-nav';
+                    mobileNav.innerHTML = `
+                        <a href="about.html">환우회 소개</a>
+                        <a href="medical.html">질환 정보</a>
+                        <a href="news.html">소식</a>
+                        <a href="resources.html">자료실</a>
+                        <a href="community.html">커뮤니티</a>
+                        <a href="https://cafe.naver.com/endnf" target="_blank">네이버 카페</a>
+                    `;
+                    document.body.appendChild(mobileNav);
+                }
+                mobileNav.classList.add('active');
+                menuBtn.classList.add('active');
+            } else {
+                const mobileNav = document.querySelector('.mobile-nav');
+                if (mobileNav) mobileNav.classList.remove('active');
+                menuBtn.classList.remove('active');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-3d .hero-bg-image');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+    </script>
+
 </body>
 
 </html>
